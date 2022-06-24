@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon src/index.js",
     "watch": "node-sass --watch src/resources/scss -o src/public/css",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -31,7 +32,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "line-staged"
     }
   },
   "dependencies": {
