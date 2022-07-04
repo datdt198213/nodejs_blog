@@ -17,14 +17,14 @@
             <option value="delete">Xóa</option>
         </select>
 
-        <button class="btn btn-primary btn-sm disabled btn-check-all-submit">Thực hiện</button>
+        <button class="btn btn-primary btn-sm btn-check-all-submit" disabled>Thực hiện</button>
     </div>
 
     <table class="table mt-4">
         <thead>
             <tr>
                 <th scope="col" colspan=2>#</th>
-                <th scope="col">Tên khóa học</th>
+                <th scope="col">Tên khóa học {{{sortable 'name' _sort}}}</th>
                 <th scope="col">Trình độ</th>
                 <th scope="col" colspan=2>Thời gian tạo</th>
             </tr>
@@ -90,7 +90,8 @@
         var deleteForm = document.forms['delete-course-form'];
         var btnDeleteCourse = document.getElementById('btn-delete-course');
         var checkboxAll = $('#checkbox-all');
-        var containerForm = document.forms['container-form'];
+        // var containerForm = document.forms['container-form'];
+        var containerForm = $('form[name="container-form"]');
         var courseItemCheckbox = $('input[name="courseIds[]"]');
         var checkAllSubmitBtn = $('.btn-check-all-submit');
 
@@ -119,23 +120,13 @@
             renderCheckAllSubmitBtn()
         })
 
-        // check all submit buttons clicked
-        checkAllSubmitBtn.on('submit', function (e) {
-            var isSubmitable = !$(this).hasClass('disabled');
-            
-            console.log(isSubmitable);
-            if (!isSubmitable) {
-                e.preventDefault(); 
-            }
-        });
-
         // Re-render check all submit buttons
         function renderCheckAllSubmitBtn() {
             var checkedCount = $('input[name="courseIds[]"]:checked').length;
             if (checkedCount > 0) {
-                checkAllSubmitBtn.removeClass('disabled');
+                checkAllSubmitBtn.attr('disabled', false);
             } else {
-                checkAllSubmitBtn.addClass('disabled');
+                checkAllSubmitBtn.attr('disabled', true);
             }
         }
     })
